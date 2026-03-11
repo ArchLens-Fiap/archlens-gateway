@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using ArchLens.Gateway.Configurations;
 using ArchLens.Gateway.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
