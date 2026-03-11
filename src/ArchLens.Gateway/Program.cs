@@ -1,4 +1,6 @@
 using System.Text;
+using ArchLens.Gateway.Configurations;
+using ArchLens.Gateway.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -13,6 +15,9 @@ try
 
     builder.Host.UseSerilog((context, configuration) =>
         configuration.ReadFrom.Configuration(context.Configuration));
+
+    builder.AddOpenTelemetryObservability();
+    builder.AddRateLimiting();
 
     builder.Services.AddReverseProxy()
         .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
@@ -68,6 +73,8 @@ try
     var app = builder.Build();
 
     app.UseSerilogRequestLogging();
+    app.UseMiddleware<SecurityHeadersMiddleware>();
+    app.UseRateLimiter();
     app.UseCors("AllowFrontend");
 
     app.UseAuthentication();
