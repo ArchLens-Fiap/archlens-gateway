@@ -53,7 +53,8 @@ try
         });
 
     builder.Services.AddAuthorizationBuilder()
-        .AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
+        .AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser())
+        .AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 
     builder.Services.AddCors(options =>
     {
