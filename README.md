@@ -2,13 +2,13 @@
 
 > **Reverse Proxy e Gateway de API com YARP**
 > Hackathon FIAP - Fase 5 | Pós-Tech Software Architecture + IA para Devs
+>
+> **Autor:** Rafael Henrique Barbosa Pereira (RM366243)
 
 [![.NET 9.0](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![YARP](https://img.shields.io/badge/YARP-Reverse%20Proxy-512BD4)](https://microsoft.github.io/reverse-proxy/)
 [![JWT](https://img.shields.io/badge/Auth-JWT%20Bearer-000000?logo=jsonwebtokens)](https://jwt.io/)
 [![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker)](https://www.docker.com/)
-
-**Autor:** Rafael Henrique Barbosa Pereira (RM366243)
 
 ---
 
@@ -243,6 +243,4 @@ graph LR
 
 ---
 
-**Autor:** Rafael Henrique Barbosa Pereira (RM366243)
-**Instituição:** FIAP - Pós-Tech Software Architecture + IA para Devs
-**Fase:** 5 - Hackathon (12SOAT + 6IADT)
+**Autor:** Rafael Henrique Barbosa Pereira (RM366243) | FIAP - Pós-Tech Software Architecture + IA para Devs | Fase 5 - Hackathon (12SOAT + 6IADT)
