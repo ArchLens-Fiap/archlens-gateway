@@ -73,6 +73,7 @@ try
 
     var app = builder.Build();
 
+    app.UseMiddleware<CorrelationIdMiddleware>();
     app.UseSerilogRequestLogging();
     app.UseMiddleware<SecurityHeadersMiddleware>();
     app.UseRateLimiter();
