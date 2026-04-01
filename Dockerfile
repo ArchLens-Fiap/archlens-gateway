@@ -12,9 +12,12 @@ WORKDIR /src
 COPY archlens-gateway/ ./archlens-gateway/
 
 WORKDIR /src/archlens-gateway
-RUN dotnet publish src/ArchLens.Gateway -c Release -o /app/publish
+RUN dotnet publish src/ArchLens.Gateway -c Release --no-restore -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+LABEL org.opencontainers.image.source="https://github.com/ArchLens-Fiap/archlens-gateway"
+LABEL org.opencontainers.image.title="ArchLens Gateway"
+LABEL org.opencontainers.image.version="1.0.0"
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
