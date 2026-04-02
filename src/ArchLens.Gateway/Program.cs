@@ -1,9 +1,10 @@
-﻿using System.Text;
+using System.Text;
 using ArchLens.Gateway.Configurations;
 using ArchLens.Gateway.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using Serilog.Sinks.OpenTelemetry;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -14,7 +15,21 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog((context, configuration) =>
-        configuration.ReadFrom.Configuration(context.Configuration));
+        configuration
+            .ReadFrom.Configuration(context.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithProperty("ServiceName", "gateway")
+            .Enrich.WithProperty("Application", "archlens")
+            .WriteTo.OpenTelemetry(options =>
+            {
+                options.Endpoint = context.Configuration["Otlp:Endpoint"]
+                    ?? "http://otel-collector:4317";
+                options.Protocol = OtlpProtocol.Grpc;
+                options.ResourceAttributes = new Dictionary<string, object>
+                {
+                    ["service.name"] = "archlens-gateway"
+                };
+            }));
 
     builder.AddOpenTelemetryObservability();
     builder.AddRateLimiting();
